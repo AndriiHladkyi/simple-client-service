@@ -1,0 +1,41 @@
+<div class='nested-fields'>
+  <div class='form-group'>
+    <div class='row'>
+      <div class='col-md-2'>
+        <%= f.collection_select( :city_id, City.order(:name), :id, :name, {include_blank: false}, {class: 'form-control '}) %>
+      </div>
+      <div class='col-md-1'>
+        <%= f.input :zip, placeholder: 'Zip', class: 'form-control', label: false %>
+      </div>
+      <div class='col-md-2'>
+        <%= f.input :street, placeholder: 'Street', class: 'form-control', label: false %>
+      </div>
+      <div class='col-md-1'>
+        <%= f.input :building, placeholder: 'Building', class: 'form-control', label: false %>
+      </div>
+      <div class='col-md-1'>
+        <%= f.input :apartment, placeholder: 'Apartment', class: 'form-control', label: false %>
+      </div>
+      <div class='col-md-2'>
+        <%= f.input :comment, placeholder: 'Comment', class: 'form-control', label: false %>
+      </div>
+      <div class='col-md-1'>
+        <%= f.input :main, as: :boolean, input_html: { class:'main-address' } %>
+      </div>
+      <div class='col-md-1'>
+        <small>
+          <%= link_to "Remove", "#", data: { action: "click->nested-form#remove_association" }, class: 'btn btn-danger btn-sm' %>
+        </small>
+      </div>
+      <div class='col'>
+        <%= f.hidden_field :_destroy %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  $('.main-address').on('change', function() {
+    $('.main-address').not(this).prop('checked', false);  
+  });
+</script>

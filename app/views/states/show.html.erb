@@ -1,0 +1,11 @@
+<p><b>Country: </b><%= @state.country.name %></p>
+<p><b>State: </b><%= @state.name %></p>
+<% unless @state.cities.empty? %>
+  <p><b>Cities: </b></p>
+  <% @state.cities.map do |city| %>
+    <p><%= city.name %></p>
+  <% end %>
+<% end %>
+
+<%= link_to 'Edit', edit_state_path(@state), class: 'btn btn-dark' %>
+<%= link_to 'Back', states_path, class: 'btn btn-dark' %>

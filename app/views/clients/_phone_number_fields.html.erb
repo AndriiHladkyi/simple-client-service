@@ -1,0 +1,25 @@
+<div class='nested-fields'>
+  <div class='form-group'>
+    <div class='row'>
+      <div class='col-md-6'>
+        <%= f.input :num, placeholder: 'Number', class: 'form-control', label: false %>
+      </div>
+      <% %>
+      <div class='col-md-1'>
+        <%= f.input :main, as: :boolean, input_html: { class:'main-phone-number' } %>
+      </div>
+      <div class='col-md-1'>
+        <%= link_to "Remove", "#", data: { action: "click->nested-form#remove_association" }, class: 'btn btn-danger btn-sm' %>
+      </div>
+      <div class='col'>
+        <%= f.hidden_field :_destroy %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  $('.main-phone-number').on('change', function() {
+    $('.main-phone-number').not(this).prop('checked', false);  
+  });
+</script>

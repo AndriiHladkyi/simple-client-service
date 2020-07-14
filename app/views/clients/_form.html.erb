@@ -1,0 +1,53 @@
+
+<%= simple_form_for(@client) do |f| %>
+  <%= f.error_notification %>
+  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+
+  <div class="form-inputs">
+    <%= f.input :first_name %>
+    <%= f.input :last_name %>
+    <%= f.input :email %>
+    <%= f.input :organization_id, collection: @organizations %> 
+    <%= f.input :delivery_type_id, collection: @delivery_types %>
+    
+    <p>Phone numbers: </p>
+    <div data-controller="nested-form">
+      <template data-target='nested-form.template'>
+        <%= f.simple_fields_for :phone_numbers, PhoneNumber.new, child_index: 'TEMPLATE_RECORD' do |phone_number| %>
+          <%= render 'phone_number_fields', f: phone_number %>
+        <% end %>
+      </template>
+
+      <%= f.simple_fields_for :phone_numbers do |phone_number| %>
+        <%= render 'phone_number_fields', f: phone_number %>
+      <% end %>
+
+      <div data-target="nested-form.add_item">
+        <%= link_to "Add new phone number", "#", data: { action: "nested-form#add_association" }, class: 'btn btn-primary btn-sm' %>
+      </div>
+    </div>
+    <br>
+
+    <p>Addresses: </p>
+    <div data-controller="nested-form">
+      <template data-target='nested-form.template'>
+        <%= f.fields_for :addresses, Address.new, child_index: 'TEMPLATE_RECORD' do |address| %>
+          <%= render 'address_fields', f: address %>
+        <% end %>
+      </template>
+
+      <%= f.fields_for :addresses do |address| %>
+        <%= render 'address_fields', f: address %>
+      <% end %>
+
+      <div data-target="nested-form.add_item">
+        <%= link_to "Add new address", "#", data: { action: "nested-form#add_association" }, class: 'btn btn-primary btn-sm' %>
+      </div>
+    </div>
+    <br>
+
+  <div class="form-actions">
+    <%= f.button :submit, class: 'btn btn-dark' %>
+    <%= link_to 'Back', clients_path, class: 'btn btn-dark' %>
+  </div>
+<% end %>

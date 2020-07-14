@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>SimpleClientService</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+  </head>
+
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark" role="navigation">
+      <div class="mx-auto" style="width: 1200px;">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse navbarCollapse" id="navbarToggler">
+          <% if current_user %>
+            <ul class="nav navbar-nav mr-auto">
+              <li class="nav-item <%= 'active' if current_page?(clients_path) %>">
+                <a class="nav-link" href="/clients">Clients</a>
+              </li>
+              <li class="nav-item <%= 'active' if current_page?(organizations_path) %>">
+                <a class="nav-link" href="/organizations">Organizations</a>
+              </li>
+              <li class="nav-item <%= 'active' if current_page?(countries_path) %>">
+                <a class="nav-link" href="/countries">Countries</a>
+              </li>
+              <li class="nav-item <%= 'active' if current_page?(states_path) %>">
+                <a class="nav-link" href="/states">States</a>
+              </li>
+              <li class="nav-item <%= 'active' if current_page?(cities_path) %>">
+                <a class="nav-link" href="/cities">Cities</a>
+              </li>
+              <li class="nav-item <%= 'active' if current_page?(delivery_types_path) %>">
+                <a class="nav-link" href="/delivery_types">Delivery Types</a>
+              </li>
+            </ul>
+            <ul class="nav navbar-nav ml-auto">
+              <li class="navbar-text">
+                <%= link_to 'Sign out', destroy_user_session_path, method: :delete, class: "nav-link" %>
+              </li>
+            </ul>
+          <% else %>
+            <ul class="nav navbar-nav ml-auto">
+              <li class="navbar-text">
+                <%= link_to 'Log in', new_session_path(resource_name), class: "nav-link" %>
+              </li>
+              <li class="navbar-text">
+                <%= link_to 'Sign up', new_registration_path(resource_name), class: "nav-link" %>
+              </li>
+            </ul>
+          <% end %>
+        </div>
+      </nav>
+    </div>
+    <div class="mx-auto p-3" style="width: 1200px;">
+      <%= render 'layouts/alerts' %>
+      <%= yield %>
+    </div>
+  </body>
+</html>

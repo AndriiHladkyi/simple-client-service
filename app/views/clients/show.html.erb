@@ -1,0 +1,51 @@
+<table class="table table-hover">
+  <tbody>
+    <tr>
+      <td>First name: </td>
+      <td><%= @client.first_name %></td>
+    </tr>
+    <tr>
+      <td>Last name: </td>
+      <td><%= @client.last_name %></td>
+    </tr>
+    <tr>
+      <td>Email: </td>
+      <td><%= @client.email %></td>
+    </tr>
+    <tr>
+      <td>Phone numbers: </td>
+      <td>
+        <% @client.phone_numbers.order(:id).each do |phone_number| %>
+          <% if phone_number.main %>
+            <b><%= phone_number.num %></b>
+          <% else %>
+            <%= phone_number.num %>
+          <% end %><br>
+        <% end %>
+      </td>
+    </tr>
+    <tr>
+      <td>Addresses: </td>
+      <td>
+        <% @client.addresses.order(:id).each do |address| %>
+          <% if address.main %>
+            <b><%= address.full %></b>
+          <% else %>
+            <%= address.full %>
+          <% end %><br>
+        <% end %>
+      </td>
+    </tr>
+    <tr>
+      <td>Organization: </td>
+      <td><%= @client.organization_name %></td>
+    </tr>
+    <tr>
+      <td>Delivery Type: </td>
+      <td><%= @client.main_delivery_type %></td>
+    </tr>
+  </tbody>
+</table>
+
+<%= link_to 'Edit', edit_client_path(@client), class: 'btn btn-dark' %> 
+<%= link_to 'Back', clients_path, class: 'btn btn-dark' %>
